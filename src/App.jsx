@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, Mail, ExternalLink, ChevronDown } from 'lucide-react';
+import { Mail, ChevronDown } from 'lucide-react';
 
 // Main Portfolio Component
 function Portfolio({ data }) {
@@ -54,7 +54,10 @@ function Portfolio({ data }) {
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-40 p-4 md:p-6 flex justify-between items-center border-b border-white border-opacity-20 bg-black bg-opacity-95">
-        <div className={`text-lg md:text-2xl tracking-widest ${glitchActive ? 'animate-pulse' : ''}`}>
+        <button 
+          onClick={() => setActiveSection('home')}
+          className={`text-lg md:text-2xl tracking-widest hover:opacity-80 transition-opacity ${glitchActive ? 'animate-pulse' : ''}`}
+        >
           <span className="relative inline-block">
             ryonkt
             {glitchActive && (
@@ -64,12 +67,12 @@ function Portfolio({ data }) {
               </>
             )}
           </span>
-        </div>
+        </button>
         <div className="flex gap-2 md:gap-6 text-xs md:text-base">
           {['about', 'biography', 'works', 'contact'].map((item) => (
             <button
               key={item}
-              onClick={() => setActiveSection(item.toLowerCase())}
+              onClick={() => setActiveSection(item)}
               className="hover:bg-white hover:text-black px-2 md:px-3 py-1 md:py-2 transition-all duration-300 border border-transparent hover:border-white"
             >
               {item}
@@ -79,7 +82,7 @@ function Portfolio({ data }) {
       </nav>
 
       {/* Main Content */}
-      <main className="pt-16 md:pt-24">
+      <main className="pt-16 md:pt-24 min-h-screen">
         {/* Hero Section */}
         {activeSection === 'home' && (
           <section className="min-h-screen flex items-center justify-center relative px-4">
@@ -99,7 +102,6 @@ function Portfolio({ data }) {
                 ambient // drone // minimal folk
               </div>
               <div className="flex items-center justify-center gap-2 text-xs md:text-sm text-gray-500">
-                <Volume2 size={16} />
                 <span className="animate-pulse">exploring the delicate balance between sound and silence</span>
               </div>
             </div>
@@ -226,7 +228,7 @@ function Portfolio({ data }) {
               
               {/* Works organized by year */}
               <div className="space-y-1">
-                {Object.entries(data.worksByYear).map(([year, works]) => (
+                {Object.entries(data.worksByYear).sort((a, b) => parseInt(b[0]) - parseInt(a[0])).map(([year, works]) => (
                   <div key={year} className="border border-white border-opacity-20">
                     <button
                       onClick={() => setExpandedYear(expandedYear === year ? null : year)}
@@ -249,26 +251,14 @@ function Portfolio({ data }) {
                             key={index}
                             className="p-4 md:p-6 border-b border-white border-opacity-10 last:border-b-0 hover:bg-white hover:bg-opacity-5 transition-all"
                           >
-                            <div className="flex flex-col md:flex-row justify-between md:items-start gap-4">
-                              <div className="flex-1">
-                                <div className="text-lg md:text-xl font-semibold mb-2 break-words">{work.title}</div>
-                                <div className="text-xs md:text-sm text-gray-500 space-y-1">
-                                  <div>{work.format} // {work.label}</div>
-                                  {work.note && <div className="text-gray-600 italic">{work.note}</div>}
-                                </div>
+                            <div className="flex flex-col gap-2">
+                              <div className="text-lg md:text-xl font-semibold break-words">{work.title}</div>
+                              <div className="text-xs md:text-sm text-gray-500">
+                                {work.format} // {work.label}
                               </div>
-                              <div className="flex items-center gap-3">
-                                {work.url && (
-                                  <a 
-                                    href={work.url} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
-                                    className="p-2 border border-current hover:scale-110 transition-transform"
-                                  >
-                                    <ExternalLink size={18} className="md:w-5 md:h-5" />
-                                  </a>
-                                )}
-                              </div>
+                              {work.note && (
+                                <div className="text-xs md:text-sm text-gray-600 italic">{work.note}</div>
+                              )}
                             </div>
                           </div>
                         ))}
@@ -287,24 +277,16 @@ function Portfolio({ data }) {
                       key={index}
                       className="border border-white border-opacity-20 p-4 md:p-6 hover:bg-white hover:bg-opacity-5 transition-all"
                     >
-                      <div className="flex flex-col md:flex-row justify-between md:items-start gap-4">
-                        <div className="flex-1">
-                          <div className="text-base md:text-lg font-semibold mb-2">{work.title}</div>
-                          <div className="text-xs md:text-sm text-gray-500 space-y-1">
-                            <div>{work.artist} // {work.year}</div>
-                            <div>{work.format} // {work.label}</div>
-                            {work.note && <div className="text-gray-600 italic">{work.note}</div>}
-                          </div>
+                      <div className="flex flex-col gap-2">
+                        <div className="text-base md:text-lg font-semibold">{work.title}</div>
+                        <div className="text-xs md:text-sm text-gray-500">
+                          {work.artist} // {work.year}
                         </div>
-                        {work.url && (
-                          <a 
-                            href={work.url} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="p-2 border border-current hover:scale-110 transition-transform"
-                          >
-                            <ExternalLink size={18} />
-                          </a>
+                        <div className="text-xs md:text-sm text-gray-500">
+                          {work.format} // {work.label}
+                        </div>
+                        {work.note && (
+                          <div className="text-xs md:text-sm text-gray-600 italic">{work.note}</div>
                         )}
                       </div>
                     </div>
@@ -357,7 +339,7 @@ function Portfolio({ data }) {
       </main>
 
       {/* Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 p-3 md:p-6 border-t border-white border-opacity-20 text-xs md:text-sm text-gray-500 flex flex-col md:flex-row justify-between gap-2 bg-black bg-opacity-95">
+      <footer className="p-3 md:p-6 border-t border-white border-opacity-20 text-xs md:text-sm text-gray-500 flex flex-col md:flex-row justify-between gap-2 bg-black">
         <div>© 2025 ryonkt // all rights reserved</div>
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
@@ -370,22 +352,20 @@ function Portfolio({ data }) {
 
 // Main App Component with Comprehensive Discography
 export default function App() {
-  const [data, setData] = useState({
+  const [data] = useState({
     worksByYear: {
       '2013': [
         { 
           title: 'breathing', 
           format: 'album (2xcd)',
           label: 'dronarivm',
-          note: 'collaboration with offthesky',
-          url: 'https://www.discogs.com/master/1060402-Ryonkt-offthesky-Breathing'
+          note: 'collaboration with offthesky'
         },
         { 
           title: 'fireflies', 
           format: 'album (cd)',
           label: 'hibernate recordings',
-          note: 'as rion with ian hawgood',
-          url: ''
+          note: 'as rion with ian hawgood'
         },
       ],
       '2012': [
@@ -393,8 +373,7 @@ export default function App() {
           title: 'troposphere', 
           format: 'album (digital)',
           label: 'twice removed',
-          note: 'guitar-only source material processed in ableton live',
-          url: ''
+          note: 'guitar-only source material processed in ableton live'
         },
       ],
       '2011': [
@@ -402,8 +381,7 @@ export default function App() {
           title: 'north small town', 
           format: 'album (digital)',
           label: 'own label',
-          note: '',
-          url: ''
+          note: ''
         },
       ],
       '2010': [
@@ -411,15 +389,13 @@ export default function App() {
           title: 'window to the room', 
           format: 'album (cd)',
           label: 'under the spire',
-          note: '',
-          url: ''
+          note: ''
         },
         { 
           title: 'past memory and image', 
           format: 'album (cd)',
           label: 'students of decay',
-          note: 'includes tracks moon and blue lake',
-          url: ''
+          note: 'includes tracks moon and blue lake'
         },
       ],
       '2009': [
@@ -427,29 +403,25 @@ export default function App() {
           title: 'small conversations', 
           format: 'album (cd)',
           label: 'experimedia',
-          note: 'limited to 150 copies',
-          url: 'https://www.discogs.com/release/2039558-Ryonkt-Small-Conversations'
+          note: 'limited to 150 copies'
         },
         { 
           title: 'four fragments', 
           format: 'album (cd-r)',
           label: 'smallfish',
-          note: 'london label',
-          url: 'https://www.discogs.com/release/1614000-Ryonkt-Four-Fragments'
+          note: 'london label'
         },
         { 
           title: 'sunlight & water', 
           format: 'album (cd-r)',
           label: 'the land of',
-          note: '',
-          url: ''
+          note: ''
         },
         { 
           title: 'periodic wind', 
           format: 'single track (digital)',
           label: 'audiotalaia',
-          note: '27-minute drone piece',
-          url: ''
+          note: '27-minute drone piece'
         },
       ],
       '2008': [
@@ -457,36 +429,31 @@ export default function App() {
           title: 'the world that was surrounded by a deep forest and warm light', 
           format: 'album (digital)',
           label: 'resting bell',
-          note: 'minimal folk / ambient. includes tracks green world, kaze, trip',
-          url: 'https://www.discogs.com/release/1290856-Ryonkt-The-World-That-Was-Surrounded-By-A-Deep-Forest-And-Warm-Light'
+          note: 'minimal folk / ambient. includes tracks green world, kaze, trip'
         },
         { 
           title: 'gray sky', 
           format: 'single track (digital)',
           label: 'resting bell',
-          note: '17-minute dense ambient drone',
-          url: ''
+          note: '17-minute dense ambient drone'
         },
         { 
           title: 'transparence', 
           format: 'album (digital)',
           label: 'audiotalaia',
-          note: '',
-          url: ''
+          note: ''
         },
         { 
           title: "today's weather is rainy", 
           format: 'album (digital)',
           label: 'dog eared records',
-          note: '',
-          url: ''
+          note: ''
         },
         { 
           title: 'all the things which i see', 
           format: 'album (digital)',
           label: 'lunar flower',
-          note: 'includes track night walk',
-          url: ''
+          note: 'includes track night walk'
         },
       ],
       '2007': [
@@ -494,15 +461,13 @@ export default function App() {
           title: 'sea', 
           format: 'album (digital)',
           label: 'noise-joy',
-          note: 'early experimental work',
-          url: ''
+          note: 'early experimental work'
         },
         { 
           title: 'slow time', 
           format: 'album (digital)',
           label: 'dog eared records',
-          note: '',
-          url: ''
+          note: ''
         },
       ],
     },
@@ -513,8 +478,7 @@ export default function App() {
         year: '2011',
         format: 'compilation track',
         label: 'air texture vol. 1',
-        note: '7:49 track. alongside oneohtrix point never, loscil, biosphere',
-        url: ''
+        note: '7:49 track. alongside oneohtrix point never, loscil, biosphere'
       },
       {
         artist: 'rion (ryonkt & ian hawgood)',
@@ -522,8 +486,7 @@ export default function App() {
         year: '2013',
         format: 'album (cd)',
         label: 'hibernate recordings',
-        note: 'analog recording with cassette & reel-to-reel tape',
-        url: ''
+        note: 'analog recording with cassette & reel-to-reel tape'
       },
       {
         artist: 'ryonkt & offthesky',
@@ -531,8 +494,7 @@ export default function App() {
         year: '2013',
         format: 'album (2xcd)',
         label: 'dronarivm',
-        note: 'collaborative dialogue between japan and usa',
-        url: 'https://www.discogs.com/master/1060402-Ryonkt-offthesky-Breathing'
+        note: 'collaborative dialogue between japan and usa'
       },
     ],
     contact: {
@@ -542,19 +504,6 @@ export default function App() {
       instagram: '@ryonkt_official'
     }
   });
-
-  // Load data from localStorage on mount
-  useEffect(() => {
-    const savedData = localStorage.getItem('ryonkt-data');
-    if (savedData) {
-      setData(JSON.parse(savedData));
-    }
-  }, []);
-
-  // Save data to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('ryonkt-data', JSON.stringify(data));
-  }, [data]);
 
   return <Portfolio data={data} />;
 }
