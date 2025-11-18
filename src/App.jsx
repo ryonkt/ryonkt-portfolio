@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, Mail, ExternalLink } from 'lucide-react';
+import { Volume2, Mail, ExternalLink, ChevronDown } from 'lucide-react';
 
 // Main Portfolio Component
 function Portfolio({ data }) {
@@ -7,6 +7,7 @@ function Portfolio({ data }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [activeSection, setActiveSection] = useState('home');
   const [noise, setNoise] = useState(0);
+  const [expandedYear, setExpandedYear] = useState(null);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -31,7 +32,7 @@ function Portfolio({ data }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white font-mono overflow-x-hidden relative">
+    <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden relative">
       {/* Noise overlay */}
       <div 
         className="fixed inset-0 pointer-events-none z-50 opacity-5"
@@ -64,12 +65,12 @@ function Portfolio({ data }) {
             )}
           </span>
         </div>
-        <div className="flex gap-3 md:gap-8 text-xs md:text-base">
-          {['about', 'works', 'contact'].map((item) => (
+        <div className="flex gap-2 md:gap-6 text-xs md:text-base">
+          {['about', 'biography', 'works', 'contact'].map((item) => (
             <button
               key={item}
               onClick={() => setActiveSection(item.toLowerCase())}
-              className="hover:bg-white hover:text-black px-2 md:px-4 py-1 md:py-2 transition-all duration-300 border border-transparent hover:border-white"
+              className="hover:bg-white hover:text-black px-2 md:px-3 py-1 md:py-2 transition-all duration-300 border border-transparent hover:border-white"
             >
               {item}
             </button>
@@ -95,15 +96,15 @@ function Portfolio({ data }) {
                 </span>
               </h1>
               <div className="text-sm md:text-xl tracking-[0.3em] md:tracking-[0.5em] mb-4 text-gray-400">
-                ambient // drone // artist
+                ambient // drone // minimal folk
               </div>
               <div className="flex items-center justify-center gap-2 text-xs md:text-sm text-gray-500">
                 <Volume2 size={16} />
-                <span className="animate-pulse">immersive soundscapes & meditative sonic environments</span>
+                <span className="animate-pulse">exploring the delicate balance between sound and silence</span>
               </div>
             </div>
 
-            {/* Animated lines - reduced on mobile */}
+            {/* Animated lines */}
             <div className="absolute inset-0 pointer-events-none">
               {[...Array(10)].map((_, i) => (
                 <div
@@ -128,22 +129,89 @@ function Portfolio({ data }) {
               <h2 className="text-4xl md:text-6xl font-bold mb-8 md:mb-12 tracking-tight border-b border-white pb-4">about</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                 <div>
-                  <p className="text-base md:text-lg leading-relaxed mb-4 md:mb-6 text-gray-300">{data.about.description1}</p>
-                  <p className="text-base md:text-lg leading-relaxed text-gray-300">{data.about.description2}</p>
+                  <p className="text-base md:text-lg leading-relaxed mb-4 md:mb-6 text-gray-300">
+                    i'm ryo nakata, born in 1984 in sapporo, japan. i create ambient and drone music under the name ryonkt. using guitar and digital processing, i craft immersive soundscapes that explore the delicate balance between sound and silence.
+                  </p>
+                  <p className="text-base md:text-lg leading-relaxed text-gray-300">
+                    my approach focuses on minimal phrases and spatial expressions, translating everyday scenery and natural phenomena into sonic landscapes. from intimate guitar-based compositions to dense digital drones and organic analog recordings, i seek to create meditative environments that invite deep listening.
+                  </p>
                 </div>
                 <div className="space-y-4">
                   <div className="border border-white p-3 md:p-4">
-                    <div className="text-xs md:text-sm text-gray-500 mb-1">techniques</div>
-                    <div className="text-xs md:text-sm">{data.about.techniques}</div>
+                    <div className="text-xs md:text-sm text-gray-500 mb-1">approach</div>
+                    <div className="text-xs md:text-sm">guitar processing / field recording / digital manipulation / analog tape / spatial composition</div>
                   </div>
                   <div className="border border-white p-3 md:p-4">
                     <div className="text-xs md:text-sm text-gray-500 mb-1">influences</div>
-                    <div className="text-xs md:text-sm">{data.about.influences}</div>
+                    <div className="text-xs md:text-sm">ambient / drone / minimal folk / atmospheric / organic soundscapes</div>
                   </div>
                   <div className="border border-white p-3 md:p-4">
                     <div className="text-xs md:text-sm text-gray-500 mb-1">tools</div>
-                    <div className="text-xs md:text-sm">{data.about.tools}</div>
+                    <div className="text-xs md:text-sm">guitar / ableton live / field recorders / cassette recorders / reel-to-reel tape</div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Biography Section */}
+        {activeSection === 'biography' && (
+          <section className="min-h-screen flex items-start justify-center p-4 md:p-12 py-24">
+            <div className="max-w-5xl w-full">
+              <h2 className="text-4xl md:text-6xl font-bold mb-8 md:mb-12 tracking-tight border-b border-white pb-4">biography</h2>
+              
+              <div className="space-y-8 md:space-y-12">
+                {/* Era 1 */}
+                <div className="border-l-2 border-white border-opacity-20 pl-6 md:pl-8">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-3 text-gray-300">2007-2008 // netlabel era</h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-3">
+                    emerged during the golden age of netlabel culture, releasing works through prominent platforms including noise-joy, dog eared records, resting bell, and audiotalaia. characterized by intimate guitar-based compositions and pastoral minimal folk influenced by natural phenomena and landscapes.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    key works include 'the world that was surrounded by a deep forest and warm light' (resting bell, 2008), which established the foundation of my sound, and 'gray sky' (2008), marking a dramatic shift toward dense, continuous ambient drone.
+                  </p>
+                </div>
+
+                {/* Era 2 */}
+                <div className="border-l-2 border-white border-opacity-20 pl-6 md:pl-8">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-3 text-gray-300">2009-2010 // physical media transition</h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-3">
+                    transitioned from digital-only releases to physical formats through respected labels including experimedia, students of decay, and smallfish. this period saw the development of more constructed, refined compositions while maintaining the exploration of transparency and flow.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    released 'small conversations' (experimedia, 2009) as a limited 150-copy pressing and contributed to important compilations, solidifying international recognition.
+                  </p>
+                </div>
+
+                {/* Era 3 */}
+                <div className="border-l-2 border-white border-opacity-20 pl-6 md:pl-8">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-3 text-gray-300">2011-2012 // methodological innovation</h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-3">
+                    contributed 'return' to the landmark compilation 'air texture vol. 1' alongside oneohtrix point never, loscil, and biosphere—a recognition of my work as essential to defining atmospheric textures in contemporary electronic music.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    released 'troposphere' (twice removed, 2012), a pivotal work created entirely from processed guitar recordings without synthesizers. utilizing ableton live for extensive filtering and processing, this album showcased a sculptural approach to sound design, creating vast soundscapes from minimal source material.
+                  </p>
+                </div>
+
+                {/* Era 4 */}
+                <div className="border-l-2 border-white border-opacity-20 pl-6 md:pl-8">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-3 text-gray-300">2013-present // analog return & collaboration</h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-3">
+                    shifted focus toward collaboration and organic recording methods. formed rion with ian hawgood (home normal), deliberately eschewing computers in favor of cassette recorders, reel-to-reel tape, and acoustic instruments. 'fireflies' (hibernate recordings, 2013) combined drone guitar with field recordings and church organs, capturing the quiet magic of rural summers.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    collaborated with offthesky on 'breathing' (dronarivm, 2013), a dialogic two-disc work exploring mutual sonic spaces. these projects represent a full-circle return to organic warmth and physical materiality after intensive digital experimentation.
+                  </p>
+                </div>
+
+                {/* Philosophy */}
+                <div className="border-l-2 border-white pl-6 md:pl-8 mt-8">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-3">philosophy</h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    my work embodies the broader trajectory of 2000s-2010s ambient music: from digital democratization through netlabels, to sculptural sound design via DAWs, and ultimately to renewed appreciation for analog warmth and physical media. each piece seeks not merely to provide atmosphere, but to invite listeners into meditative spaces where sound and silence exist in dialogue.
+                  </p>
                 </div>
               </div>
             </div>
@@ -152,35 +220,96 @@ function Portfolio({ data }) {
 
         {/* Works Section */}
         {activeSection === 'works' && (
-          <section className="min-h-screen flex items-center justify-center p-4 md:p-12">
+          <section className="min-h-screen flex items-start justify-center p-4 md:p-12 py-24">
             <div className="max-w-6xl w-full">
               <h2 className="text-4xl md:text-6xl font-bold mb-8 md:mb-12 tracking-tight border-b border-white pb-4">works</h2>
+              
+              {/* Works organized by year */}
               <div className="space-y-1">
-                {data.works.map((work, index) => (
-                  <div
-                    key={work.id}
-                    className="border border-white border-opacity-20 p-4 md:p-6 hover:bg-white hover:text-black transition-all duration-300 cursor-pointer group"
-                  >
-                    <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
-                      <div className="flex-1">
-                        <div className="text-lg md:text-2xl font-bold tracking-tight mb-2 break-words lowercase">{work.title}</div>
-                        <div className="text-xs md:text-sm text-gray-500 group-hover:text-gray-700 lowercase">
-                          {work.type} // {work.year}
-                        </div>
+                {Object.entries(data.worksByYear).map(([year, works]) => (
+                  <div key={year} className="border border-white border-opacity-20">
+                    <button
+                      onClick={() => setExpandedYear(expandedYear === year ? null : year)}
+                      className="w-full p-4 md:p-6 flex justify-between items-center hover:bg-white hover:bg-opacity-5 transition-all"
+                    >
+                      <div className="text-left">
+                        <div className="text-xl md:text-2xl font-bold">{year}</div>
+                        <div className="text-xs md:text-sm text-gray-500 mt-1">{works.length} release{works.length > 1 ? 's' : ''}</div>
                       </div>
-                      <div className="flex items-center gap-3 md:gap-4">
-                        <button className="p-2 border border-current hover:scale-110 transition-transform">
-                          <Volume2 size={18} className="md:w-5 md:h-5" />
-                        </button>
+                      <ChevronDown 
+                        size={24} 
+                        className={`transform transition-transform ${expandedYear === year ? 'rotate-180' : ''}`}
+                      />
+                    </button>
+                    
+                    {expandedYear === year && (
+                      <div className="border-t border-white border-opacity-20">
+                        {works.map((work, index) => (
+                          <div
+                            key={index}
+                            className="p-4 md:p-6 border-b border-white border-opacity-10 last:border-b-0 hover:bg-white hover:bg-opacity-5 transition-all"
+                          >
+                            <div className="flex flex-col md:flex-row justify-between md:items-start gap-4">
+                              <div className="flex-1">
+                                <div className="text-lg md:text-xl font-semibold mb-2 break-words">{work.title}</div>
+                                <div className="text-xs md:text-sm text-gray-500 space-y-1">
+                                  <div>{work.format} // {work.label}</div>
+                                  {work.note && <div className="text-gray-600 italic">{work.note}</div>}
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                {work.url && (
+                                  <a 
+                                    href={work.url} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="p-2 border border-current hover:scale-110 transition-transform"
+                                  >
+                                    <ExternalLink size={18} className="md:w-5 md:h-5" />
+                                  </a>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Collaborations & Compilations */}
+              <div className="mt-12 pt-12 border-t border-white border-opacity-20">
+                <h3 className="text-2xl md:text-3xl font-bold mb-6">collaborations & compilations</h3>
+                <div className="space-y-4">
+                  {data.collaborations.map((work, index) => (
+                    <div
+                      key={index}
+                      className="border border-white border-opacity-20 p-4 md:p-6 hover:bg-white hover:bg-opacity-5 transition-all"
+                    >
+                      <div className="flex flex-col md:flex-row justify-between md:items-start gap-4">
+                        <div className="flex-1">
+                          <div className="text-base md:text-lg font-semibold mb-2">{work.title}</div>
+                          <div className="text-xs md:text-sm text-gray-500 space-y-1">
+                            <div>{work.artist} // {work.year}</div>
+                            <div>{work.format} // {work.label}</div>
+                            {work.note && <div className="text-gray-600 italic">{work.note}</div>}
+                          </div>
+                        </div>
                         {work.url && (
-                          <a href={work.url} target="_blank" rel="noopener noreferrer" className="p-2 border border-current hover:scale-110 transition-transform">
-                            <ExternalLink size={18} className="md:w-5 md:h-5" />
+                          <a 
+                            href={work.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="p-2 border border-current hover:scale-110 transition-transform"
+                          >
+                            <ExternalLink size={18} />
                           </a>
                         )}
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </section>
@@ -194,8 +323,7 @@ function Portfolio({ data }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                 <div>
                   <p className="text-base md:text-lg leading-relaxed mb-6 md:mb-8 text-gray-300">
-                    available for collaborations, commissions, and sound design projects. 
-                    creating immersive soundscapes and meditative sonic environments.
+                    available for collaborations, commissions, and sound design projects. interested in exploring new territories in ambient and drone music.
                   </p>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3 text-base md:text-lg break-all">
@@ -240,65 +368,178 @@ function Portfolio({ data }) {
   );
 }
 
-// Main App Component with Real Discography Data
+// Main App Component with Comprehensive Discography
 export default function App() {
   const [data, setData] = useState({
-    works: [
-      { 
-        id: 1, 
-        title: "breathing", 
-        year: "2013", 
-        type: "album (with offthesky)", 
-        url: "https://www.discogs.com/master/1060402-Ryonkt-offthesky-Breathing" 
+    worksByYear: {
+      '2013': [
+        { 
+          title: 'breathing', 
+          format: 'album (2xcd)',
+          label: 'dronarivm',
+          note: 'collaboration with offthesky',
+          url: 'https://www.discogs.com/master/1060402-Ryonkt-offthesky-Breathing'
+        },
+        { 
+          title: 'fireflies', 
+          format: 'album (cd)',
+          label: 'hibernate recordings',
+          note: 'as rion with ian hawgood',
+          url: ''
+        },
+      ],
+      '2012': [
+        { 
+          title: 'troposphere', 
+          format: 'album (digital)',
+          label: 'twice removed',
+          note: 'guitar-only source material processed in ableton live',
+          url: ''
+        },
+      ],
+      '2011': [
+        { 
+          title: 'north small town', 
+          format: 'album (digital)',
+          label: 'own label',
+          note: '',
+          url: ''
+        },
+      ],
+      '2010': [
+        { 
+          title: 'window to the room', 
+          format: 'album (cd)',
+          label: 'under the spire',
+          note: '',
+          url: ''
+        },
+        { 
+          title: 'past memory and image', 
+          format: 'album (cd)',
+          label: 'students of decay',
+          note: 'includes tracks moon and blue lake',
+          url: ''
+        },
+      ],
+      '2009': [
+        { 
+          title: 'small conversations', 
+          format: 'album (cd)',
+          label: 'experimedia',
+          note: 'limited to 150 copies',
+          url: 'https://www.discogs.com/release/2039558-Ryonkt-Small-Conversations'
+        },
+        { 
+          title: 'four fragments', 
+          format: 'album (cd-r)',
+          label: 'smallfish',
+          note: 'london label',
+          url: 'https://www.discogs.com/release/1614000-Ryonkt-Four-Fragments'
+        },
+        { 
+          title: 'sunlight & water', 
+          format: 'album (cd-r)',
+          label: 'the land of',
+          note: '',
+          url: ''
+        },
+        { 
+          title: 'periodic wind', 
+          format: 'single track (digital)',
+          label: 'audiotalaia',
+          note: '27-minute drone piece',
+          url: ''
+        },
+      ],
+      '2008': [
+        { 
+          title: 'the world that was surrounded by a deep forest and warm light', 
+          format: 'album (digital)',
+          label: 'resting bell',
+          note: 'minimal folk / ambient. includes tracks green world, kaze, trip',
+          url: 'https://www.discogs.com/release/1290856-Ryonkt-The-World-That-Was-Surrounded-By-A-Deep-Forest-And-Warm-Light'
+        },
+        { 
+          title: 'gray sky', 
+          format: 'single track (digital)',
+          label: 'resting bell',
+          note: '17-minute dense ambient drone',
+          url: ''
+        },
+        { 
+          title: 'transparence', 
+          format: 'album (digital)',
+          label: 'audiotalaia',
+          note: '',
+          url: ''
+        },
+        { 
+          title: "today's weather is rainy", 
+          format: 'album (digital)',
+          label: 'dog eared records',
+          note: '',
+          url: ''
+        },
+        { 
+          title: 'all the things which i see', 
+          format: 'album (digital)',
+          label: 'lunar flower',
+          note: 'includes track night walk',
+          url: ''
+        },
+      ],
+      '2007': [
+        { 
+          title: 'sea', 
+          format: 'album (digital)',
+          label: 'noise-joy',
+          note: 'early experimental work',
+          url: ''
+        },
+        { 
+          title: 'slow time', 
+          format: 'album (digital)',
+          label: 'dog eared records',
+          note: '',
+          url: ''
+        },
+      ],
+    },
+    collaborations: [
+      {
+        artist: 'ryonkt',
+        title: 'return',
+        year: '2011',
+        format: 'compilation track',
+        label: 'air texture vol. 1',
+        note: '7:49 track. alongside oneohtrix point never, loscil, biosphere',
+        url: ''
       },
-      { 
-        id: 2, 
-        title: "four fragments", 
-        year: "2009", 
-        type: "album", 
-        url: "https://www.discogs.com/release/1614000-Ryonkt-Four-Fragments" 
+      {
+        artist: 'rion (ryonkt & ian hawgood)',
+        title: 'fireflies',
+        year: '2013',
+        format: 'album (cd)',
+        label: 'hibernate recordings',
+        note: 'analog recording with cassette & reel-to-reel tape',
+        url: ''
       },
-      { 
-        id: 3, 
-        title: "small conversations", 
-        year: "2009", 
-        type: "album", 
-        url: "https://www.discogs.com/release/2039558-Ryonkt-Small-Conversations" 
-      },
-      { 
-        id: 4, 
-        title: "the world that was surrounded by a deep forest and warm light", 
-        year: "2008", 
-        type: "album", 
-        url: "https://www.discogs.com/release/1290856-Ryonkt-The-World-That-Was-Surrounded-By-A-Deep-Forest-And-Warm-Light" 
-      },
-      { 
-        id: 5, 
-        title: "past memory and image", 
-        year: "2008", 
-        type: "ep", 
-        url: "https://ryonkt.bandcamp.com/" 
-      },
-      { 
-        id: 6, 
-        title: "sunlight & water", 
-        year: "2007", 
-        type: "ep", 
-        url: "https://ryonkt.bandcamp.com/" 
+      {
+        artist: 'ryonkt & offthesky',
+        title: 'breathing',
+        year: '2013',
+        format: 'album (2xcd)',
+        label: 'dronarivm',
+        note: 'collaborative dialogue between japan and usa',
+        url: 'https://www.discogs.com/master/1060402-Ryonkt-offthesky-Breathing'
       },
     ],
-    about: {
-      description1: "I'm Ryo Nakata, born in 1984 and based in Tokyo, Japan. I create ambient and drone music under the name ryonkt. Using guitar and laptop, I craft immersive soundscapes that explore the delicate balance between sound and silence.",
-      description2: "My approach focuses on minimal phrases and spatial expressions, translating everyday scenery and emotions into sonic landscapes. I seek to create meditative environments that invite deep listening, where each sound exists in dialogue with the space around it. Through collaboration with other artists, I continue to explore new territories in ambient music.",
-      techniques: "guitar / laptop production / minimal phrases / spatial expression / field recording / delay layers",
-      influences: "ambient / drone / minimal folk / atmospheric / experimental",
-      tools: "guitar / notebook pc / audio editing software / delay effects / reverb processing"
-    },
     contact: {
-      email: "contact@ryonkt.org",
-      bandcamp: "ryonkt.bandcamp.com",
-      soundcloud: "soundcloud.com/ryonkt",
-      instagram: "@ryonkt_official"
+      email: 'contact@ryonkt.org',
+      bandcamp: 'ryonkt.bandcamp.com',
+      soundcloud: 'soundcloud.com/ryonkt',
+      instagram: '@ryonkt_official'
     }
   });
 
