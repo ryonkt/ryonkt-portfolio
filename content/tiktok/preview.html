@@ -1,0 +1,88 @@
+<div class="wrap">
+  <h1>投稿00 プレビュー：カルーセル5枚（スワイプ）</h1>
+  <p class="sub">💰 トークン節約・出力最適化 ／ 看板投稿。実際の投稿ではこのテンプレを文言差し替えで全5本に使い回します。</p>
+  <div class="rail">
+    <!-- Slide 1 -->
+    <div class="card">
+      <div class="tag">💰 トークン節約</div>
+      <div class="page">01 / 05</div>
+      <div class="hook">まだClaude Codeを<br><span class="q">"素の状態"</span>で使ってるの？💸</div>
+      <div class="body">git status や npm install の長いログ、そのまま全部読ませてない？<br><br>それ、トークン<span class="hl">(=料金と待ち時間)</span>をドブに捨ててるかも。<br><br>まず入れるべき神ツール3選、保存推奨🔖</div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="card">
+      <div class="num">①</div>
+      <div class="tool">rtk-ai/rtk</div>
+      <div class="one">ターミナルの長い出力を圧縮してからClaudeに渡す"通訳役"（プロキシ）</div>
+      <div class="fire">🔥 入力トークンを<span class="big">60〜90%</span>削減できると言われる</div>
+      <div class="baby">👶 会話がサクサク進む。まず最初に入れたい必須枠 <span class="badge y">ふつう</span></div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="card">
+      <div class="num">②</div>
+      <div class="tool">JuliusBrussee/caveman</div>
+      <div class="one">Claudeの返事を"洞穴の住人"並みに短くする追加機能（公式スキル）</div>
+      <div class="fire">🔥 出力トークンを<span class="big">最大75%</span>削減、返答も高速化と報告あり</div>
+      <div class="baby">👶 前置きゼロ、結論だけサッと出る <span class="badge g">かんたん</span></div>
+    </div>
+    <!-- Slide 4 -->
+    <div class="card">
+      <div class="num">③</div>
+      <div class="tool">drona23/claude-token-efficient</div>
+      <div class="one">CLAUDE.md（指示書ファイル）の"低燃費"テンプレ集</div>
+      <div class="fire">🔥 少ない文字数でAIに効くルールの書き方お手本</div>
+      <div class="baby">👶 コピペで置くだけ。AIの寄り道・暴走が減る <span class="badge g">かんたん</span></div>
+    </div>
+    <!-- Slide 5 -->
+    <div class="card cta">
+      <div class="ctatitle">まず入れる順番はこれ👇</div>
+      <div class="steps">
+        <div>✅ ① rtk（入力を絞る）</div>
+        <div>✅ ② caveman（出力を絞る）</div>
+        <div>✅ ③ claude-token-efficient（仕上げ）</div>
+      </div>
+      <div class="note">※数字は報告ベースの目安。環境で変わります</div>
+      <div class="btns"><span class="btn">📌 保存</span><span class="btn">🔔 フォロー</span></div>
+    </div>
+  </div>
+  <p class="hint">← 横スクロールで5枚を確認 →</p>
+</div>
+
+<style>
+  :root{ --bg:#0b1020; --card:#0f1630; --ink:#f5f7ff; --acc:#ff9f43; --acc2:#ffd43b; --muted:#9aa3c0; }
+  *{ box-sizing:border-box; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:24px 16px 48px; font-family:-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif; color:#111; }
+  h1{ font-size:20px; margin:0 0 4px; }
+  .sub{ color:#555; margin:0 0 18px; font-size:13px; }
+  .rail{ display:flex; gap:16px; overflow-x:auto; padding:8px 4px 20px; scroll-snap-type:x mandatory; }
+  .card{ scroll-snap-align:center; flex:0 0 300px; height:534px; border-radius:26px; background:linear-gradient(160deg,#0b1020,#141d3a); color:var(--ink); padding:26px 22px; position:relative; box-shadow:0 10px 30px rgba(0,0,0,.25); display:flex; flex-direction:column; }
+  .tag{ align-self:flex-start; background:var(--acc); color:#1a1200; font-weight:800; font-size:12px; padding:5px 12px; border-radius:999px; }
+  .page{ position:absolute; right:18px; bottom:16px; font-size:11px; color:var(--muted); letter-spacing:.5px; }
+  .hook{ font-size:26px; font-weight:900; line-height:1.35; margin:22px 0 16px; }
+  .hook .q{ color:var(--acc2); }
+  .body{ font-size:14px; line-height:1.8; color:#e7ebff; }
+  .hl{ color:var(--acc2); font-weight:700; }
+  .num{ font-size:44px; font-weight:900; color:var(--acc); }
+  .tool{ font-family:ui-monospace,Menlo,Consolas,monospace; font-size:18px; font-weight:800; margin:4px 0 14px; word-break:break-all; }
+  .one{ font-size:14px; line-height:1.7; color:#e7ebff; margin-bottom:auto; }
+  .fire{ background:rgba(255,159,67,.16); border:1px solid rgba(255,159,67,.5); border-radius:14px; padding:12px 14px; font-size:14px; line-height:1.6; margin:14px 0 12px; }
+  .fire .big{ font-size:22px; font-weight:900; color:var(--acc2); }
+  .baby{ background:rgba(255,255,255,.06); border-radius:14px; padding:12px 14px; font-size:13px; line-height:1.6; color:#dfe4ff; }
+  .badge{ display:inline-block; font-size:11px; font-weight:800; padding:2px 9px; border-radius:999px; margin-left:6px; }
+  .badge.g{ background:#12b886; color:#03150e; }
+  .badge.y{ background:var(--acc2); color:#2a2100; }
+  .cta{ justify-content:center; text-align:left; }
+  .ctatitle{ font-size:22px; font-weight:900; margin-bottom:18px; }
+  .steps div{ font-size:16px; font-weight:700; margin:10px 0; }
+  .note{ font-size:11px; color:var(--muted); margin:18px 0 20px; }
+  .btns{ display:flex; gap:12px; }
+  .btn{ flex:1; text-align:center; background:var(--acc); color:#1a1200; font-weight:900; font-size:15px; padding:12px 0; border-radius:14px; }
+  .hint{ text-align:center; color:#888; font-size:12px; margin-top:4px; }
+
+  @media (prefers-color-scheme: dark){
+    .wrap{ color:#f5f7ff; }
+    h1{ color:#fff; } .sub{ color:#aab; } .hint{ color:#889; }
+  }
+  :root[data-theme="light"] .wrap{ color:#111; }
+  :root[data-theme="dark"] .wrap{ color:#f5f7ff; }
+</style>
